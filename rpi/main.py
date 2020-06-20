@@ -49,6 +49,7 @@ def test_server():
         reply = 'Pong!'
     else:
         reply = 'unknown msg'
+    print('reply: {}'.format(reply))
     conn.send(reply.encode())
     conn.close()
     print('connection closed.')

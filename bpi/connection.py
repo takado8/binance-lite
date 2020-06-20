@@ -17,7 +17,7 @@ def client(data_to_sign):
 
 
 def test():
-    host = socket.gethostbyaddr('173.68.217.147')
+    host = '173.68.217.147'
 
     port = 5000  # socket server port number
 
