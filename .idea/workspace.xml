@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5594d358-cb29-4b6d-98e0-b5e70b5899f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bpi/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/korne.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bpi/connection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpi/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bpi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bpi/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,24 +25,103 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
-          <entry key="py" value="1" />
+          <entry key="py" value="9" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
-          <entry key="Python" value="1" />
+          <entry key="Python" value="9" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="py" value="1113" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="Python" value="1113" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bpi/main.py">
-          <provider selected="true" editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="394">
+              <caret line="411" column="17" selection-start-line="411" selection-start-column="17" selection-end-line="411" selection-end-column="17" />
+              <folding>
+                <element signature="e#0#15#0" expanded="true" />
+                <element signature="e#348#488#0" />
+                <element signature="e#518#876#0" />
+                <element signature="e#539#1505#0" />
+                <element signature="e#2428#3383#0" />
+                <element signature="e#816#4904#0" />
+                <element signature="e#2413#6448#1" />
+                <element signature="e#4960#6532#0" />
+                <element signature="e#9042#10213#0" />
+                <element signature="e#6212#6464#0" />
+                <element signature="e#4993#5058#0" />
+                <element signature="e#5146#5210#0" />
+                <element signature="e#5301#5368#0" />
+                <element signature="e#5472#5582#0" />
+                <element signature="e#5670#5772#0" />
+                <element signature="e#5858#7424#0" />
+                <element signature="e#12985#13144#0" />
+                <element signature="e#13084#13596#0" />
+                <element signature="e#8327#8791#0" />
+                <marker date="1592694828651" expanded="true" signature="668:3274" ph="..." />
+                <marker date="1592694828651" expanded="true" signature="13003:13164" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/bpi/connection.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="474">
+              <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/rpi/main.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="394">
+              <caret line="86" column="4" lean-forward="true" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+              <folding>
+                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#350#862#0" />
+                <element signature="e#816#1679#0" />
+              </folding>
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>create_orde</find>
+      <find>def _request</find>
+      <find>def _handle</find>
+      <find>_get</find>
+      <find>_put</find>
+      <find>ping</find>
+      <find>ping()</find>
+      <find>create_ord</find>
+    </findStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,11 +129,14 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+        <option value="$PROJECT_DIR$/connection.py" />
         <option value="$PROJECT_DIR$/bpi/main.py" />
+        <option value="$PROJECT_DIR$/rpi/main.py" />
+        <option value="$PROJECT_DIR$/bpi/connection.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="714" />
     <option name="width" value="1215" />
     <option name="height" value="543" />
@@ -74,6 +161,11 @@
               <item name="binance-lite" type="462c0819:PsiDirectoryNode" />
               <item name="bpi" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="binance-lite" type="b2602c69:ProjectViewProjectNode" />
+              <item name="binance-lite" type="462c0819:PsiDirectoryNode" />
+              <item name="rpi" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -83,6 +175,11 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$/bpi/main.py" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\korne\Desktop\bitcoin\binance-lite\bpi" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -134,17 +231,18 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24960254" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.10731319" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Python Console" />
+      <window_info anchor="bottom" id="Python Console" weight="0.3291815" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.3291815" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.63879" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -158,8 +256,190 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/bpi/main.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/operator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="264" column="6" selection-start-line="264" selection-start-column="6" selection-end-line="264" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/binance/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="19" column="49" selection-start-line="19" selection-start-column="49" selection-end-line="19" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/hashlib.py">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/exceptions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="83" lean-forward="true" selection-start-line="83" selection-end-line="83" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/binance/client.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="1753" column="41" lean-forward="true" selection-start-line="1753" selection-start-column="41" selection-end-line="1753" selection-end-column="41" />
+          <folding>
+            <element signature="e#16#30#0" expanded="true" />
+            <element signature="e#13033#13371#0" />
+            <element signature="e#15465#16431#0" />
+            <element signature="e#35086#36353#0" />
+            <element signature="e#36426#40646#0" />
+            <element signature="e#40724#42176#0" />
+            <element signature="e#42258#43659#0" />
+            <element signature="e#43742#45072#0" />
+            <element signature="e#45120#46343#0" />
+            <element signature="e#46395#47511#0" />
+            <element signature="e#47564#48684#0" />
+            <element signature="e#48736#50911#0" />
+            <element signature="e#50960#52836#0" />
+            <element signature="e#52886#54764#0" />
+            <element signature="e#54817#56308#0" />
+            <element signature="e#56353#57549#0" />
+            <element signature="e#57599#58853#0" />
+            <element signature="e#58901#59944#0" />
+            <element signature="e#59995#61099#0" />
+            <element signature="e#63346#64480#0" />
+            <element signature="e#64523#65018#0" />
+            <element signature="e#65072#65872#0" />
+            <element signature="e#65920#69676#0" />
+            <element signature="e#69725#70935#0" />
+            <element signature="e#70997#72453#0" />
+            <element signature="e#72502#73540#0" />
+            <element signature="e#73593#74922#0" />
+            <element signature="e#74992#76477#0" />
+            <element signature="e#76532#77541#0" />
+            <element signature="e#77597#79146#0" />
+            <element signature="e#79201#79893#0" />
+            <element signature="e#79969#80691#0" />
+            <element signature="e#80744#81275#0" />
+            <element signature="e#81324#81837#0" />
+            <element signature="e#81923#84031#0" />
+            <element signature="e#84083#84891#0" />
+            <element signature="e#84944#85765#0" />
+            <element signature="e#85823#86525#0" />
+            <element signature="e#86584#87448#0" />
+            <element signature="e#87507#88371#0" />
+            <element signature="e#88425#89214#0" />
+            <element signature="e#89267#90068#0" />
+            <element signature="e#90123#94483#0" />
+            <element signature="e#94538#95969#0" />
+            <element signature="e#96028#97522#0" />
+            <element signature="e#97582#99353#0" />
+            <element signature="e#99405#100914#0" />
+            <element signature="e#100972#102561#0" />
+            <element signature="e#102618#104524#0" />
+            <element signature="e#104577#106448#0" />
+            <element signature="e#106503#107105#0" />
+            <element signature="e#107164#107774#0" />
+            <element signature="e#107828#108601#0" />
+            <element signature="e#108661#109239#0" />
+            <element signature="e#109295#109861#0" />
+            <element signature="e#109946#110183#0" />
+            <element signature="e#110247#110534#0" />
+            <element signature="e#110594#110828#0" />
+            <element signature="e#110898#111194#0" />
+            <element signature="e#111252#111480#0" />
+            <element signature="e#111536#111783#0" />
+            <element signature="e#111838#112062#0" />
+            <element signature="e#112126#112362#0" />
+            <element signature="e#112428#112670#0" />
+            <element signature="e#112734#112974#0" />
+            <element signature="e#113050#114539#0" />
+            <element signature="e#114607#116015#0" />
+            <element signature="e#116078#116955#0" />
+            <element signature="e#117013#118536#0" />
+            <element signature="e#118593#118776#0" />
+            <element signature="e#118814#119030#0" />
+            <element signature="e#119077#119303#0" />
+            <element signature="e#119357#119559#0" />
+            <element signature="e#119616#119829#0" />
+            <element signature="e#119890#120112#0" />
+            <element signature="e#120172#120514#0" />
+            <element signature="e#120564#120833#0" />
+            <element signature="e#120887#121094#0" />
+            <element signature="e#121150#121363#0" />
+            <element signature="e#121413#121660#0" />
+            <element signature="e#121717#121939#0" />
+            <element signature="e#121999#122251#0" />
+            <element signature="e#122313#122540#0" />
+            <element signature="e#122597#122830#0" />
+            <element signature="e#122890#123126#0" />
+            <element signature="e#123178#123411#0" />
+            <element signature="e#123467#123656#0" />
+            <element signature="e#123467#123579#1" />
+            <element signature="e#123709#123907#0" />
+            <element signature="e#123966#124185#0" />
+            <element signature="e#124243#124480#0" />
+            <element signature="e#124536#124741#0" />
+            <element signature="e#124807#125029#0" />
+            <element signature="e#125086#125306#0" />
+            <element signature="e#125365#125579#0" />
+            <element signature="e#125630#125846#0" />
+            <element signature="e#125905#126147#0" />
+            <element signature="e#126209#126427#0" />
+            <element signature="e#126493#126732#0" />
+            <element signature="e#126799#127042#0" />
+            <element signature="e#127106#127320#0" />
+            <element signature="e#127378#127616#0" />
+            <element signature="e#127674#127900#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpi/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="411" column="17" selection-start-line="411" selection-start-column="17" selection-end-line="411" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#348#488#0" />
+            <element signature="e#518#876#0" />
+            <element signature="e#539#1505#0" />
+            <element signature="e#2428#3383#0" />
+            <element signature="e#816#4904#0" />
+            <element signature="e#2413#6448#1" />
+            <element signature="e#4960#6532#0" />
+            <element signature="e#9042#10213#0" />
+            <element signature="e#6212#6464#0" />
+            <element signature="e#4993#5058#0" />
+            <element signature="e#5146#5210#0" />
+            <element signature="e#5301#5368#0" />
+            <element signature="e#5472#5582#0" />
+            <element signature="e#5670#5772#0" />
+            <element signature="e#5858#7424#0" />
+            <element signature="e#12985#13144#0" />
+            <element signature="e#13084#13596#0" />
+            <element signature="e#8327#8791#0" />
+            <marker date="1592694828651" expanded="true" signature="668:3274" ph="..." />
+            <marker date="1592694828651" expanded="true" signature="13003:13164" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rpi/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="394">
+          <caret line="86" column="4" lean-forward="true" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#350#862#0" />
+            <element signature="e#816#1679#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bpi/connection.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="474">
+          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
