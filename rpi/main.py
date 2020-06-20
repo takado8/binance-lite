@@ -33,54 +33,25 @@ def _order_params(data):
     return params
 
 
-def server():
-    # get the hostname
-    host = socket.gethostname()
-    port = 5000  # initiate port no above 1024
-
-    server_socket = socket.socket()  # get instance
-    # look closely. The bind() function takes tuple as argument
-    server_socket.bind((host, port))  # bind host address and port together
-
-    # configure how many client the server can listen simultaneously
-    server_socket.listen(1)
-    conn, address = server_socket.accept()  # accept new connection
-    print("Connection from: " + str(address))
-
-    # receive data stream. it won't accept data packet greater than 1024 bytes
-    data = conn.recv(1024).decode()
-    if not data:
-        # if data is not received break
-        return
-    print("from connected user: " + str(data))
-    reply = 'signature'
-    conn.send(reply.encode())  # send data to the client
-
-    conn.close()  # close the connection
-
-
 def test_server():
-    # get the hostname
-    host = socket.gethostname()
-    port = 5000  # initiate port no above 1024
-
-    server_socket = socket.socket()  # get instance
-    # look closely. The bind() function takes tuple as argument
-    server_socket.bind((host, port))  # bind host address and port together
-
-    # configure how many client the server can listen simultaneously
-    server_socket.listen(1)
-    conn, address = server_socket.accept()  # accept new connection
-    print("Connection from: " + str(address))
-    # receive data stream. it won't accept data packet greater than 1024 bytes
+    host = "173.68.217.147"
+    port = 5000
+    mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    mySocket.bind((host, port))
+    mySocket.listen(1)
+    print('waiting for connection...')
+    conn, addr = mySocket.accept()
+    print("Connection from: " + str(addr))
     data = conn.recv(1024).decode()
-    if not data:
-        print('no data.')
-        return
-    print("from connected user: " + str(data))
-    reply = 'Pong!'
-    conn.send(reply.encode())  # send data to the client
-    conn.close()  # close the connection
+    print('Received data: {}'.format(data))
+    if data == 'Ping!':
+        reply = 'Pong!'
+    else:
+        reply = 'unknown msg'
+    conn.send(reply.encode())
+    conn.close()
+    print('connection closed.')
 
 
 if __name__ == '__main__':

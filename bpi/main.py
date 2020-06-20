@@ -1,7 +1,7 @@
 import requests
 import time
 from operator import itemgetter
-from exceptions import BinanceAPIException, BinanceRequestException
+from bpi.exceptions import BinanceAPIException, BinanceRequestException
 from bpi import connection
 
 

@@ -27,6 +27,10 @@ def test():
     client_socket.send(message.encode())  # send message
     data = client_socket.recv(1024).decode()  # receive response
     print('Received from server: ' + data)  # show in terminal
+    if data == 'Pong!':
+        print('Test is positive')
+    else:
+        print('Test is negative')
     client_socket.close()  # close the connection
 
 

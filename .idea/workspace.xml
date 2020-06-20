@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5594d358-cb29-4b6d-98e0-b5e70b5899f5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/korne.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bpi/connection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpi/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bpi/connection.py" beforeDir="false" afterPath="$PROJECT_DIR$/bpi/connection.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bpi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/bpi/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/exceptions.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpi/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/rpi/main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,12 +33,12 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="py" value="1113" />
+          <entry key="py" value="1297" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="Python" value="1113" />
+          <entry key="Python" value="1297" />
         </counts>
       </usages-collector>
     </session>
@@ -50,10 +48,9 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bpi/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="411" column="17" selection-start-line="411" selection-start-column="17" selection-end-line="411" selection-end-column="17" />
+            <state relative-caret-position="-786">
+              <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
               <folding>
-                <element signature="e#0#15#0" expanded="true" />
                 <element signature="e#348#488#0" />
                 <element signature="e#518#876#0" />
                 <element signature="e#539#1505#0" />
@@ -72,8 +69,8 @@
                 <element signature="e#12985#13144#0" />
                 <element signature="e#13084#13596#0" />
                 <element signature="e#8327#8791#0" />
-                <marker date="1592694828651" expanded="true" signature="668:3274" ph="..." />
-                <marker date="1592694828651" expanded="true" signature="13003:13164" ph="..." />
+                <marker date="1592695551338" expanded="true" signature="672:3278" ph="..." />
+                <marker date="1592695551338" expanded="true" signature="13007:13168" ph="..." />
               </folding>
             </state>
           </provider>
@@ -82,8 +79,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bpi/connection.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="474">
-              <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+            <state relative-caret-position="384">
+              <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
             </state>
           </provider>
         </entry>
@@ -91,12 +88,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rpi/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="394">
-              <caret line="86" column="4" lean-forward="true" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
+            <state relative-caret-position="97">
+              <caret line="37" column="15" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
                 <element signature="e#350#862#0" />
-                <element signature="e#816#1679#0" />
               </folding>
             </state>
           </provider>
@@ -392,12 +388,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/rpi/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="37" column="15" selection-start-line="37" selection-start-column="15" selection-end-line="37" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+            <element signature="e#350#862#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/bpi/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="411" column="17" selection-start-line="411" selection-start-column="17" selection-end-line="411" selection-end-column="17" />
+        <state relative-caret-position="-786">
+          <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
             <element signature="e#348#488#0" />
             <element signature="e#518#876#0" />
             <element signature="e#539#1505#0" />
@@ -416,28 +422,16 @@
             <element signature="e#12985#13144#0" />
             <element signature="e#13084#13596#0" />
             <element signature="e#8327#8791#0" />
-            <marker date="1592694828651" expanded="true" signature="668:3274" ph="..." />
-            <marker date="1592694828651" expanded="true" signature="13003:13164" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rpi/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="394">
-          <caret line="86" column="4" lean-forward="true" selection-start-line="86" selection-start-column="4" selection-end-line="86" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-            <element signature="e#350#862#0" />
-            <element signature="e#816#1679#0" />
+            <marker date="1592695551338" expanded="true" signature="672:3278" ph="..." />
+            <marker date="1592695551338" expanded="true" signature="13007:13168" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/bpi/connection.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="474">
-          <caret line="33" column="10" selection-start-line="33" selection-start-column="10" selection-end-line="33" selection-end-column="10" />
+        <state relative-caret-position="384">
+          <caret line="31" column="9" lean-forward="true" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
         </state>
       </provider>
     </entry>
