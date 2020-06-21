@@ -1,7 +1,6 @@
 import socket
 import hashlib
 import hmac
-from operator import itemgetter
 
 
 API_SECRET = 'CqcTMoFGymVIw9opl9ZSD62J1tLmKLLYNc3VvSi3uhiZAC0dLlE5jl7MhDp1A5t5'
@@ -12,25 +11,25 @@ def _generate_signature(query_string):
     return m.hexdigest()
 
 
-def _order_params(data):
-    """Convert params to list with signature as last element
-
-    :param data:
-    :return:
-
-    """
-    has_signature = False
-    params = []
-    for key, value in data.items():
-        if key == 'signature':
-            has_signature = True
-        else:
-            params.append((key, value))
-    # sort parameters by key
-    params.sort(key=itemgetter(0))
-    if has_signature:
-        params.append(('signature', data['signature']))
-    return params
+def server():
+    host = "173.68.217.147"
+    port = 5000
+    mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+    mySocket.bind((host, port))
+    mySocket.listen(1)
+    print('waiting for connection...')
+    conn, addr = mySocket.accept()
+    print("Connection from: " + str(addr))
+    data = conn.recv(10000).decode()
+    print('Received data: {}'.format(data))
+    signature = _generate_signature(data)
+    signature_bytes = signature.encode()
+    print('signature size: {}'.format(len(signature_bytes)))
+    print('replying signature...')
+    conn.send(signature_bytes)
+    conn.close()
+    print('connection closed.')
 
 
 def test_server():
@@ -57,4 +56,4 @@ def test_server():
 
 if __name__ == '__main__':
     while True:
-        test_server()
+        server()

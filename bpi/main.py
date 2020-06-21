@@ -1,5 +1,6 @@
 import requests
 import time
+import rpi.main as rpimain
 from operator import itemgetter
 from exceptions import BinanceAPIException, BinanceRequestException
 import connection
@@ -348,7 +349,7 @@ class BinanceLite(object):
         if signed:
             # generate signature
             kwargs['data']['timestamp'] = int(time.time() * 1000)
-            kwargs['data']['signature'] = self._generate_signature(kwargs['data'])
+            kwargs['data']['signature'] = self._call_for_signature(kwargs['data'])
 
         # sort get and post params to match signature order
         if data:
@@ -367,11 +368,11 @@ class BinanceLite(object):
         self.response = getattr(self.session, method)(uri, **kwargs)
         return self._handle_response()
 
-    def call_for_signature(self, data):
+    def _call_for_signature(self, data):
         ordered_data = self._order_params(data)
         query_string = '&'.join(["{}={}".format(d[0],d[1]) for d in ordered_data])
-
-        return query_string
+        signature = connection.get_signature(query_string)
+        return signature
 
     def _order_params(self, data):
         """Convert params to list with signature as last element
@@ -409,4 +410,4 @@ class BinanceLite(object):
 # cl = BinanceLite(api_key='KeiTDjvyqj8lV8rzKxASBOa6lNzFiSQeeOQW75j9OJ6CF0xYqGfw9Ylwit1dRHfY')
 # assets = cl.get_asset_balance(asset='BTC')
 # print(assets)
-connection.test()
+# connection.test()
