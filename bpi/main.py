@@ -1,8 +1,8 @@
 import requests
 import time
 from operator import itemgetter
-from bpi.exceptions import BinanceAPIException, BinanceRequestException
-from bpi import connection
+from exceptions import BinanceAPIException, BinanceRequestException
+import connection
 
 
 class BinanceLite(object):
