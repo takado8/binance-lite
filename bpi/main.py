@@ -1,6 +1,5 @@
 import requests
 import time
-import rpi.main as rpimain
 from operator import itemgetter
 from exceptions import BinanceAPIException, BinanceRequestException
 import connection
@@ -411,8 +410,8 @@ class BinanceLite(object):
 
 
 cl = BinanceLite(api_key='KeiTDjvyqj8lV8rzKxASBOa6lNzFiSQeeOQW75j9OJ6CF0xYqGfw9Ylwit1dRHfY')
-# assets = cl.get_asset_balance(asset='BTC')
-# print(assets)
+assets = cl.get_asset_balance(asset='BTC')
+print(assets)
 test_order = cl.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
                                   type=BinanceLite.ORDER_TYPE_LIMIT_MAKER,
                                   side=BinanceLite.SIDE_BUY,
