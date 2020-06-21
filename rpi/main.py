@@ -13,7 +13,7 @@ def _generate_signature(query_string):
 
 def server():
     host = "173.68.217.147"
-    port = 5000
+    port = 18956
     mySocket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     mySocket.bind((host, port))
@@ -21,7 +21,7 @@ def server():
     print('waiting for connection...')
     conn, addr = mySocket.accept()
     print("Connection from: " + str(addr))
-    data = conn.recv(10000).decode()
+    data = conn.recv(256).decode()
     print('Received data: {}'.format(data))
     signature = _generate_signature(data)
     signature_bytes = signature.encode()
@@ -42,7 +42,7 @@ def test_server():
     print('waiting for connection...')
     conn, addr = mySocket.accept()
     print("Connection from: " + str(addr))
-    data = conn.recv(1024).decode()
+    data = conn.recv(256).decode()
     print('Received data: {}'.format(data))
     if data == 'Ping!':
         reply = 'Pong!'

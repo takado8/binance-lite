@@ -22,6 +22,8 @@ class BinanceLite(object):
     ORDER_TYPE_TAKE_PROFIT_LIMIT = 'TAKE_PROFIT_LIMIT'
     ORDER_TYPE_LIMIT_MAKER = 'LIMIT_MAKER'
 
+    SYMBOL_BTCUSDT = 'BTCUSDT'
+
     def __init__(self, api_key=None):
         self._requests_params = None
         self.API_KEY = api_key
@@ -370,7 +372,8 @@ class BinanceLite(object):
 
     def _call_for_signature(self, data):
         ordered_data = self._order_params(data)
-        query_string = '&'.join(["{}={}".format(d[0],d[1]) for d in ordered_data])
+        query_string = '&'.join(["{}={}".format(d[0], d[1]) for d in ordered_data])
+        print('query_string: {}'.format(query_string))
         signature = connection.get_signature(query_string)
         return signature
 
@@ -407,7 +410,13 @@ class BinanceLite(object):
             raise BinanceRequestException('Invalid Response: %s' % self.response.text)
 
 
-# cl = BinanceLite(api_key='KeiTDjvyqj8lV8rzKxASBOa6lNzFiSQeeOQW75j9OJ6CF0xYqGfw9Ylwit1dRHfY')
+cl = BinanceLite(api_key='KeiTDjvyqj8lV8rzKxASBOa6lNzFiSQeeOQW75j9OJ6CF0xYqGfw9Ylwit1dRHfY')
 # assets = cl.get_asset_balance(asset='BTC')
 # print(assets)
-# connection.test()
+test_order = cl.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+                                  type=BinanceLite.ORDER_TYPE_LIMIT_MAKER,
+                                  side=BinanceLite.SIDE_BUY,
+                                  quantity=100,
+                                  price=8800)
+print(test_order)
+
