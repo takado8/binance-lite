@@ -9,7 +9,7 @@ class Mayes(object):
     def __init__(self):
         self.bs = AES.block_size
 
-    def create_secret_file(self,secret_plain,passwd):
+    def create_secret_file(self, secret_plain, passwd):
         secret_enc = self.encrypt(secret_plain, passwd)
         with open('constants', 'wb+') as file:
             file.write(secret_enc)
