@@ -6,7 +6,7 @@ def get_signature(data_to_sign):
     host = '173.68.217.147'
     port = 18956  # socket server port number
     client_socket = socket.socket()  # instantiate
-    client_socket.settimeout(3)
+    client_socket.settimeout(2)
     client_socket.connect((host, port))  # connect to the server
     print('connected.')
     data_to_sign_bytes = data_to_sign.encode()
@@ -23,7 +23,7 @@ def test():
     port = 5000  # socket server port number
 
     client_socket = socket.socket()  # instantiate
-    client_socket.settimeout(3)
+    client_socket.settimeout(2)
     client_socket.connect((host, port))  # connect to the server
     message = 'Ping!'
     client_socket.send(message.encode())  # send message
