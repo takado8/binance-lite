@@ -87,7 +87,7 @@ class BinanceLite(object):
         """
         return self._get('depth', data=params)
 
-    def get_asset_balance(self, asset, **params):
+    def get_asset_balance(self, **params):
         """Get current asset balance.
 
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-information-user_data
@@ -110,14 +110,13 @@ class BinanceLite(object):
         :raises: BinanceRequestException, BinanceAPIException
 
         """
-        print('------------------------------------\nGet asset balance...')
         res = self.get_account(**params)
         if res:
             # find asset balance in list of balances
             if "balances" in res:
                 for bal in res['balances']:
-                    if bal['asset'].lower() == asset.lower():
-                        return bal
+                    # if bal['asset'].lower() == asset.lower():
+                    return bal
         return None
 
     def get_open_orders(self, **params):
@@ -280,7 +279,7 @@ class BinanceLite(object):
         :raises: BinanceRequestException, BinanceAPIException, BinanceOrderException, BinanceOrderMinAmountException, BinanceOrderMinPriceException, BinanceOrderMinTotalException, BinanceOrderUnknownSymbolException, BinanceOrderInactiveSymbolException
 
         """
-        print('------------------------------------\nCreate order:')
+        params['newOrderRespType'] = 'FULL'
         return self._post('order', True, data=params)
 
     def create_test_order(self, **params):
@@ -319,7 +318,7 @@ class BinanceLite(object):
 
 
         """
-        print('------------------------------------\nCreate test order:')
+        params['newOrderRespType'] = 'FULL'
         return self._post('order/test',True,data=params)
 
     def get_account(self, **params):
@@ -544,26 +543,6 @@ class BinanceLite(object):
         """
         return self._get('klines', data=params)
 
-    def _get_earliest_valid_timestamp(self, symbol, interval):
-        """Get earliest valid open timestamp from Binance
-
-        :param symbol: Name of symbol pair e.g BNBBTC
-        :type symbol: str
-        :param interval: Binance Kline interval
-        :type interval: str
-
-        :return: first valid timestamp
-
-        """
-        kline = self.get_klines(
-            symbol=symbol,
-            interval=interval,
-            limit=1,
-            startTime=0,
-            endTime=None
-        )
-        return kline[0][0]
-
     @staticmethod
     def interval_to_milliseconds(interval):
         """Convert a Binance interval string to milliseconds
@@ -609,6 +588,26 @@ class BinanceLite(object):
 
         # return the difference in time
         return int((d - epoch).total_seconds() * 1000.0)
+
+    def _get_earliest_valid_timestamp(self, symbol, interval):
+        """Get earliest valid open timestamp from Binance
+
+        :param symbol: Name of symbol pair e.g BNBBTC
+        :type symbol: str
+        :param interval: Binance Kline interval
+        :type interval: str
+
+        :return: first valid timestamp
+
+        """
+        kline = self.get_klines(
+            symbol=symbol,
+            interval=interval,
+            limit=1,
+            startTime=0,
+            endTime=None
+        )
+        return kline[0][0]
 
     def _init_session(self):
         session = requests.session()
@@ -720,9 +719,9 @@ class BinanceLite(object):
         except ValueError:
             raise BinanceRequestException('Invalid Response: %s' % self.response.text)
 
-#
-# cl = BinanceLite()
-# assets = cl.get_asset_balance(asset='BTC')
-# print(assets)
+
+cl = BinanceLite()
+assets = cl.get_asset_balance(asset='BTC')
+print(assets)
 # print(cl.market_buy(100))
 # print(cl.market_sell(0.0115))
