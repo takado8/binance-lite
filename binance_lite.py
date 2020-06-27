@@ -87,13 +87,11 @@ class BinanceLite(object):
         """
         return self._get('depth', data=params)
 
-    def get_asset_balance(self, **params):
-        """Get current asset balance.
+    def get_assets_balance(self,**params):
+        """Get BTC and USDT assets balances
 
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#account-information-user_data
 
-        :param asset: required
-        :type asset: str
         :param recvWindow: the number of milliseconds the request is valid for
         :type recvWindow: int
 
@@ -102,21 +100,32 @@ class BinanceLite(object):
         .. code-block:: python
 
             {
-                "asset": "BTC",
-                "free": "4723846.89208129",
-                "locked": "0.00000000"
-            }
+            'BTC': {
+                'free': 0.0016,
+                'locked': 0.0
+            },
+            'USDT': {
+                'free': 0.0,
+                'locked': 0.0
+            }}
 
         :raises: BinanceRequestException, BinanceAPIException
 
         """
         res = self.get_account(**params)
         if res:
-            # find asset balance in list of balances
             if "balances" in res:
-                for bal in res['balances']:
-                    # if bal['asset'].lower() == asset.lower():
-                    return bal
+                balances = {}
+                for balance in res['balances']:
+                    if balance['asset'] == 'BTC':
+                        balances['BTC'] = {}
+                        balances['BTC']['free'] = float(balance['free'])
+                        balances['BTC']['locked'] = float(balance['locked'])
+                    elif balance['asset'] == 'USDT':
+                        balances['USDT'] = {}
+                        balances['USDT']['free'] = float(balance['free'])
+                        balances['USDT']['locked'] = float(balance['locked'])
+                return balances
         return None
 
     def get_open_orders(self, **params):
@@ -155,18 +164,32 @@ class BinanceLite(object):
         return self._get('openOrders',True,data=params)
 
     def market_buy(self, usd_amount):
-        take = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+        info = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
                                           type=BinanceLite.ORDER_TYPE_MARKET,
                                           side=BinanceLite.SIDE_BUY,
                                             quoteOrderQty=usd_amount)
-        return take
+        return info
 
     def market_sell(self, btc_amount):
-        take = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+        info = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
                                           type=BinanceLite.ORDER_TYPE_MARKET,
                                           side=BinanceLite.SIDE_SELL,
                                             quantity=btc_amount)
-        return take
+        return info
+
+    def market_test_buy(self, usd_amount):
+        info = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+                                          type=BinanceLite.ORDER_TYPE_MARKET,
+                                          side=BinanceLite.SIDE_BUY,
+                                            quoteOrderQty=usd_amount)
+        return info
+
+    def market_test_sell(self, btc_amount):
+        info = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+                                          type=BinanceLite.ORDER_TYPE_MARKET,
+                                          side=BinanceLite.SIDE_SELL,
+                                            quantity=btc_amount)
+        return info
 
     def create_order(self, **params):
         """"
@@ -446,13 +469,13 @@ class BinanceLite(object):
         limit = limit
 
         # convert interval to useful value in seconds
-        timeframe = self.interval_to_milliseconds(interval)
+        timeframe = self._interval_to_milliseconds(interval)
 
         # convert our date strings to milliseconds
         if isinstance(start_str_or_float, float):
             start_ts = int(start_str_or_float * 1000)
         else:
-            start_ts = self.date_to_milliseconds(start_str_or_float)
+            start_ts = self._date_to_milliseconds(start_str_or_float)
 
         # establish first available start timestamp
         first_valid_ts = self._get_earliest_valid_timestamp(symbol, interval)
@@ -464,12 +487,12 @@ class BinanceLite(object):
             if isinstance(end_str_or_float, float):
                 end_ts = int(end_str_or_float * 1000)
             else:
-                end_ts = self.date_to_milliseconds(end_str_or_float)
+                end_ts = self._date_to_milliseconds(end_str_or_float)
 
         idx = 0
         while True:
             # fetch the klines from start_ts up to max 500 entries or the end_ts if set
-            temp_data = self.get_klines(
+            temp_data = self._get_klines(
                 symbol=symbol,
                 interval=interval,
                 limit=limit,
@@ -501,7 +524,7 @@ class BinanceLite(object):
 
         return output_data
 
-    def get_klines(self, **params):
+    def _get_klines(self,**params):
         """Kline/candlestick bars for a symbol. Klines are uniquely identified by their open time.
 
         https://github.com/binance-exchange/binance-official-api-docs/blob/master/rest-api.md#klinecandlestick-data
@@ -543,52 +566,6 @@ class BinanceLite(object):
         """
         return self._get('klines', data=params)
 
-    @staticmethod
-    def interval_to_milliseconds(interval):
-        """Convert a Binance interval string to milliseconds
-
-        :param interval: Binance interval string, e.g.: 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w
-        :type interval: str
-
-        :return:
-             int value of interval in milliseconds
-             None if interval prefix is not a decimal integer
-             None if interval suffix is not one of m, h, d, w
-
-        """
-        seconds_per_unit = {
-            "m": 60,
-            "h": 60 * 60,
-            "d": 24 * 60 * 60,
-            "w": 7 * 24 * 60 * 60,
-        }
-        try:
-            return int(interval[:-1]) * seconds_per_unit[interval[-1]] * 1000
-        except (ValueError,KeyError):
-            return None
-
-    @staticmethod
-    def date_to_milliseconds(date_str):
-        """Convert UTC date to milliseconds
-
-        If using offset strings add "UTC" to date string e.g. "now UTC", "11 hours ago UTC"
-
-        See dateparse docs for formats http://dateparser.readthedocs.io/en/latest/
-
-        :param date_str: date in readable format, i.e. "January 01, 2018", "11 hours ago UTC", "now UTC"
-        :type date_str: str
-        """
-        # get epoch value in UTC
-        epoch = datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc)
-        # parse our date string
-        d = dateparser.parse(date_str)
-        # if the date is not timezone aware apply UTC timezone
-        if d.tzinfo is None or d.tzinfo.utcoffset(d) is None:
-            d = d.replace(tzinfo=pytz.utc)
-
-        # return the difference in time
-        return int((d - epoch).total_seconds() * 1000.0)
-
     def _get_earliest_valid_timestamp(self, symbol, interval):
         """Get earliest valid open timestamp from Binance
 
@@ -600,7 +577,7 @@ class BinanceLite(object):
         :return: first valid timestamp
 
         """
-        kline = self.get_klines(
+        kline = self._get_klines(
             symbol=symbol,
             interval=interval,
             limit=1,
@@ -686,6 +663,18 @@ class BinanceLite(object):
         signature = connection.get_signature(query_string)
         return signature
 
+    def _handle_response(self):
+        """Internal helper for handling API responses from the Binance server.
+        Raises the appropriate exceptions when necessary; otherwise, returns the
+        response.
+        """
+        if not str(self.response.status_code).startswith('2'):
+            raise BinanceAPIException(self.response)
+        try:
+            return self.response.json()
+        except ValueError:
+            raise BinanceRequestException('Invalid Response: %s' % self.response.text)
+
     @staticmethod
     def _order_params(data):
         """Convert params to list with signature as last element
@@ -707,21 +696,54 @@ class BinanceLite(object):
             params.append(('signature', data['signature']))
         return params
 
-    def _handle_response(self):
-        """Internal helper for handling API responses from the Binance server.
-        Raises the appropriate exceptions when necessary; otherwise, returns the
-        response.
+    @staticmethod
+    def _interval_to_milliseconds(interval):
+        """Convert a Binance interval string to milliseconds
+
+        :param interval: Binance interval string, e.g.: 1m, 3m, 5m, 15m, 30m, 1h, 2h, 4h, 6h, 8h, 12h, 1d, 3d, 1w
+        :type interval: str
+
+        :return:
+             int value of interval in milliseconds
+             None if interval prefix is not a decimal integer
+             None if interval suffix is not one of m, h, d, w
+
         """
-        if not str(self.response.status_code).startswith('2'):
-            raise BinanceAPIException(self.response)
+        seconds_per_unit = {
+            "m": 60,
+            "h": 60 * 60,
+            "d": 24 * 60 * 60,
+            "w": 7 * 24 * 60 * 60,
+        }
         try:
-            return self.response.json()
-        except ValueError:
-            raise BinanceRequestException('Invalid Response: %s' % self.response.text)
+            return int(interval[:-1]) * seconds_per_unit[interval[-1]] * 1000
+        except (ValueError,KeyError):
+            return None
+
+    @staticmethod
+    def _date_to_milliseconds(date_str):
+        """Convert UTC date to milliseconds
+
+        If using offset strings add "UTC" to date string e.g. "now UTC", "11 hours ago UTC"
+
+        See dateparse docs for formats http://dateparser.readthedocs.io/en/latest/
+
+        :param date_str: date in readable format, i.e. "January 01, 2018", "11 hours ago UTC", "now UTC"
+        :type date_str: str
+        """
+        # get epoch value in UTC
+        epoch = datetime.utcfromtimestamp(0).replace(tzinfo=pytz.utc)
+        # parse our date string
+        d = dateparser.parse(date_str)
+        # if the date is not timezone aware apply UTC timezone
+        if d.tzinfo is None or d.tzinfo.utcoffset(d) is None:
+            d = d.replace(tzinfo=pytz.utc)
+
+        # return the difference in time
+        return int((d - epoch).total_seconds() * 1000.0)
 
 
-cl = BinanceLite()
-assets = cl.get_asset_balance(asset='BTC')
-print(assets)
-# print(cl.market_buy(100))
-# print(cl.market_sell(0.0115))
+if __name__ == '__main__':
+    cl = BinanceLite()
+    assets = cl.get_assets_balance()
+    print(assets)
