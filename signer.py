@@ -7,7 +7,9 @@ from log import Log
 from encryption import Mayes
 
 
-ACCEPTED_IPS = ['173.68.217.169'  # win
+ACCEPTED_IPS = [
+    # '173.68.217.169',  # win
+    '173.68.217.188'  # bpi
                 ]
 
 

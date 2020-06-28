@@ -1,6 +1,7 @@
 import json
 import os
 from datetime import datetime
+from collections import OrderedDict
 
 
 LOG_DIR_PATH = 'log'
@@ -20,7 +21,7 @@ class Log:
         self.path_log = os.path.join(LOG_DIR_PATH, date_time_now + '.json')
 
         # make logs dicts
-        self.log = {}
+        self.log = OrderedDict()
 
     def append(self, data:str):
         if not isinstance(data, str):

@@ -15,14 +15,14 @@ def get_signature(data_to_sign):
         client_socket.close()  # close the connection
         if data:
             print('sign received.')
+            return [data]
         else:
             print('SIGNING ERROR.')
+            return [False, 'SIGNING ERROR.']
     except Exception as ex:
         print('Error:')
         print(ex)
-        return False
-
-    return data
+        return [False, str(ex)]
 
 
 def test():

@@ -28,7 +28,8 @@ class BinanceLite(object):
 
     SYMBOL_BTCUSDT = 'BTCUSDT'
 
-    def __init__(self):
+    def __init__(self, log=None):
+        self.log = log
         self._requests_params = None
         self.session = self._init_session()
 
@@ -793,10 +794,18 @@ class BinanceLite(object):
 
     def _call_for_signature(self, data):
         ordered_data = self._order_params(data)
-        for item in ordered_data:
-            print(item)
         query_string = '&'.join(["{}={}".format(d[0], d[1]) for d in ordered_data])
+        # log that
+        self.log.append_specific(query_string)
         signature = connection.get_signature(query_string)
+        # validate and log that too
+        if signature[0]: # result positive
+            signature = signature[0]
+            self.log.append_specific('signature obtained.')
+        else:   # error
+            error = signature[1]
+            self.log.append_general(error)
+            signature = False
         return signature
 
     def _handle_response(self):
