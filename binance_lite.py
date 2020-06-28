@@ -163,33 +163,171 @@ class BinanceLite(object):
         """
         return self._get('openOrders',True,data=params)
 
+    def limit_buy(self, usd_amount, price):
+        btc_amount = round(usd_amount / price, 6)
+        btc_amount = f'{btc_amount:.6f}'
+        try:
+            try_result = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+                                           type=BinanceLite.ORDER_TYPE_LIMIT_MAKER,
+                                           side=BinanceLite.SIDE_BUY,
+                                           quantity=btc_amount,
+                                           price=price)
+            result = {'result': True,'info': try_result}
+        except BinanceAPIException as ex:
+            if ex.code == -1013:
+                if ex.message == 'Filter failure: MIN_NOTIONAL':
+                    print('min notional error!')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            elif ex.code == -2010:
+                if ex.message == 'Account has insufficient balance for requested action.':
+                    print('insufficient assets')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            else:
+                result = {'result': False,'info': 'error code: {} msg: {}'.format(ex.code,ex.message)}
+        except Exception as ex:
+            result = {'result': False,'info': str(ex)}
+        return result
+
+    def limit_sell(self, btc_amount, price):
+        btc_amount = round(btc_amount, 6)
+        btc_amount = f'{btc_amount:.6f}'
+        try:
+            try_result = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+                                     type=BinanceLite.ORDER_TYPE_LIMIT_MAKER,
+                                     side=BinanceLite.SIDE_SELL,
+                                     quantity=btc_amount,
+                                     price=price)
+            result = {'result': True, 'info': try_result}
+        except BinanceAPIException as ex:
+            if ex.code == -1013:
+                if ex.message == 'Filter failure: MIN_NOTIONAL':
+                    print('min notional error!')
+                    result = {'result': False, 'info': False}
+                else:
+                    result = {'result': False, 'info': ex.message}
+            elif ex.code == -2010:
+                if ex.message == 'Account has insufficient balance for requested action.':
+                    print('insufficient assets')
+                    result = {'result': False, 'info': False}
+                else:
+                    result = {'result': False, 'info': ex.message}
+            else:
+                result = {'result': False, 'info': 'error code: {} msg: {}'.format(ex.code, ex.message)}
+        except Exception as ex:
+            result = {'result': False, 'info': str(ex)}
+        return result
+
     def market_buy(self, usd_amount):
-        info = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+        usd_amount = round(usd_amount, 2)
+        try:
+            info = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
                                           type=BinanceLite.ORDER_TYPE_MARKET,
                                           side=BinanceLite.SIDE_BUY,
                                             quoteOrderQty=usd_amount)
-        return info
+            result = {'result': True, 'info': info}
+        except BinanceAPIException as ex:
+            if ex.code == -1013:
+                if ex.message == 'Filter failure: MIN_NOTIONAL':
+                    print('min notional error!')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            elif ex.code == -2010:
+                if ex.message == 'Account has insufficient balance for requested action.':
+                    print('insufficient assets')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            else:
+                result = {'result': False,'info': 'error code: {} msg: {}'.format(ex.code,ex.message)}
+        except Exception as ex:
+            result = {'result': False,'info': str(ex)}
+        return result
 
     def market_sell(self, btc_amount):
-        info = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+        btc_amount = round(btc_amount, 6)
+        try:
+            info = self.create_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
                                           type=BinanceLite.ORDER_TYPE_MARKET,
                                           side=BinanceLite.SIDE_SELL,
                                             quantity=btc_amount)
-        return info
+            result = {'result': True, 'info': info}
+        except BinanceAPIException as ex:
+            if ex.code == -1013:
+                if ex.message == 'Filter failure: MIN_NOTIONAL':
+                    print('min notional error!')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            elif ex.code == -2010:
+                if ex.message == 'Account has insufficient balance for requested action.':
+                    print('insufficient assets')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            else:
+                result = {'result': False,'info': 'error code: {} msg: {}'.format(ex.code,ex.message)}
+        except Exception as ex:
+            result = {'result': False,'info': str(ex)}
+        return result
 
     def market_test_buy(self, usd_amount):
-        info = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+        try:
+            usd_amount = round(usd_amount, 2)
+            info = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
                                           type=BinanceLite.ORDER_TYPE_MARKET,
                                           side=BinanceLite.SIDE_BUY,
                                             quoteOrderQty=usd_amount)
-        return info
+            result = {'result': True,'info': info}
+        except BinanceAPIException as ex:
+            if ex.code == -1013:
+                if ex.message == 'Filter failure: MIN_NOTIONAL':
+                    print('min notional error!')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            elif ex.code == -2010:
+                if ex.message == 'Account has insufficient balance for requested action.':
+                    print('insufficient assets')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            else:
+                result = {'result': False,'info': 'error code: {} msg: {}'.format(ex.code,ex.message)}
+        except Exception as ex:
+            result = {'result': False,'info': str(ex)}
+        return result
 
     def market_test_sell(self, btc_amount):
-        info = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
-                                          type=BinanceLite.ORDER_TYPE_MARKET,
-                                          side=BinanceLite.SIDE_SELL,
-                                            quantity=btc_amount)
-        return info
+        try:
+            btc_amount = round(btc_amount, 6)
+            info = self.create_test_order(symbol=BinanceLite.SYMBOL_BTCUSDT,
+                                              type=BinanceLite.ORDER_TYPE_MARKET,
+                                              side=BinanceLite.SIDE_SELL,
+                                                quantity=btc_amount)
+            result = {'result': True,'info': info}
+        except BinanceAPIException as ex:
+            if ex.code == -1013:
+                if ex.message == 'Filter failure: MIN_NOTIONAL':
+                    print('min notional error!')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            elif ex.code == -2010:
+                if ex.message == 'Account has insufficient balance for requested action.':
+                    print('insufficient assets')
+                    result = {'result': False,'info': False}
+                else:
+                    result = {'result': False,'info': ex.message}
+            else:
+                result = {'result': False,'info': 'error code: {} msg: {}'.format(ex.code,ex.message)}
+        except Exception as ex:
+            result = {'result': False,'info': str(ex)}
+        return result
 
     def create_order(self, **params):
         """"
@@ -424,9 +562,7 @@ class BinanceLite(object):
             candles_1m = self.get_historical_klines(start_str_or_float=start_str_or_float,
                                                  end_str_or_float=end_str_or_float, interval=interval)
         except Exception as ex:
-            print('Error:')
-            print(ex)
-            return False
+            return str(ex), False
         total_data = []
         for i in range(len(candles_1m)):
             open = float(candles_1m[i][1])
@@ -439,7 +575,7 @@ class BinanceLite(object):
                             'volume': float(candles_1m[i][5]),
                             'action': None}
             total_data.append(single_input)
-        return total_data
+        return False, total_data
 
     def get_historical_klines(self,interval,start_str_or_float,end_str_or_float=None,symbol=SYMBOL_BTCUSDT,limit=1000):
         """Get Historical Klines from Binance
