@@ -23,12 +23,18 @@ class Signer:
             self.secret = mayes.read_secret(passwd)
         else:
             print('Create secret file.')
+            passwd2 = getpass.getpass(prompt='Repeat passw:')
+            if passwd != passwd2:
+                print('Passwords do not match.')
+                exit(0)
             secret = getpass.getpass(prompt='Secret:')
             mayes.create_secret_file(secret, passwd)
             print('Secret file created. Relog to validate.')
             exit(0)
         passwd = None
+        passwd2 = None
         secret = None
+        del passwd2
         del passwd
         del secret
 
