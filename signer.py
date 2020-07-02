@@ -5,6 +5,7 @@ import getpass
 import os
 from log import Log
 from encryption import Mayes
+import time
 
 
 ACCEPTED_IPS = [
@@ -119,7 +120,6 @@ if __name__ == '__main__':
     while True:
         result = signer.run_server()
         if not result:
-            import time
             if result is False:
                 time.sleep(10)  # unknown connection rejected
             elif result is None:
