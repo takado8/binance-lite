@@ -8,7 +8,6 @@ from encryption import Mayes
 
 
 ACCEPTED_IPS = [
-    # '173.68.217.169',  # win
     '173.68.217.188'  # bpi
                 ]
 
@@ -23,13 +22,20 @@ class Signer:
             self.secret = mayes.read_secret(passwd)
         else:
             print('Create secret file.')
-            passwd2 = getpass.getpass(prompt='Repeat passw:')
-            if passwd != passwd2:
+            passwd2 = getpass.getpass(prompt='Repeat passwd:')
+            while passwd != passwd2:
                 print('Passwords do not match.')
-                exit(0)
+                passwd = getpass.getpass()
+                passwd2 = getpass.getpass(prompt='Repeat passw:')
             secret = getpass.getpass(prompt='Secret:')
             mayes.create_secret_file(secret, passwd)
             print('Secret file created. Relog to validate.')
+            passwd = None
+            passwd2 = None
+            secret = None
+            del passwd2
+            del passwd
+            del secret
             exit(0)
         passwd = None
         passwd2 = None
@@ -46,8 +52,9 @@ class Signer:
             mySocket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
             mySocket.bind((host, port))
             mySocket.listen(1)
-            print('waiting for connection...')
+            # print('waiting for connection...')
             conn, addr = mySocket.accept()
+            start = time.time()
             info = 'Connection from: {}'.format(addr)
             print(info)
             self.log.append(info)
@@ -58,7 +65,7 @@ class Signer:
                 self.log.append(info)
                 conn.close()
                 mySocket.close()
-                return
+                return False
             data = conn.recv(256).decode()
             info = 'Received data: {}'.format(data)
             print(info)
@@ -70,7 +77,7 @@ class Signer:
             self.log.append(info)
             conn.send(signature_bytes)
             conn.close()
-            info = 'connection closed.'
+            info = 'Execution time: {}'.format(round(time.time() - start), 4)
             print(info)
             self.log.append(info)
             return True
@@ -78,7 +85,7 @@ class Signer:
             info = 'Connection error: {}'.format(ex)
             print(info)
             self.log.append(info)
-            return False
+            return None
 
     def _generate_signature(self, query_string):
         m = hmac.new(self.secret.encode('utf-8'),query_string.encode('utf-8'),hashlib.sha256)
@@ -110,8 +117,10 @@ class Signer:
 if __name__ == '__main__':
     signer = Signer()
     while True:
-        if signer.run_server():
-            pass
-        else:
+        result = signer.run_server()
+        if not result:
             import time
-            time.sleep(1)
+            if result is False:
+                time.sleep(10)  # unknown connection rejected
+            elif result is None:
+                time.sleep(1)  # some error
